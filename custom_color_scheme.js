@@ -797,6 +797,7 @@ if(window.snake) {
       burger:        true,
       lime:          true,
       red_pepper:    true,
+      grey_skull:    true,
     });
   };
   window.snake.desert = function() {
