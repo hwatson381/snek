@@ -549,7 +549,7 @@ if(window.snake) {
                 settings.grey_skull && (window.darks.push(dead.skull),   document.querySelector('#apple').appendChild(normal.skull));
 
                 const HZ = code.match(
-                  /g\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?g\.type:0/
+                  /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
                 )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
                 eval(
                   code.match(
