@@ -557,9 +557,8 @@ if(window.snake) {
                   )[0].replace(
                     '{',
                     `{
-                      // ${HZ} = [...document.querySelector('#apple').children].map(e => [{ wa: { canvas: e }, oa: { canvas: e } }][0]);
                       
-                      ${HZ} = [...document.querySelector('#apple').children].map((e, j) => [{ wa: { canvas: e }, oa: { canvas: window.darks[j] } }][0]);
+                      ${HZ} = [...document.querySelector('#apple').children].map((e, j) => [{ oa: { canvas: e }, ka: { canvas: window.darks[j] } }][0]);
 
 
                       // if(${HZ}.length >= 22) {
