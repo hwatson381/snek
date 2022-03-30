@@ -672,11 +672,13 @@ if(window.snake) {
                     `);
                   } else {
                     eval(`
-                      ${sounds1}.${eat}.play = function() {    
+                      ${sounds1}.${eat}.play = function() {
+                        if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
                         const ___________ = new Audio(window.______poi);
                         ___________.play();
                       };
                       ${sounds2}.${burp}.play = function() {    
+                        if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
                         const ___________ = new Audio(window.______blech);
                         ___________.play();
                       };
