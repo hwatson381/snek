@@ -646,45 +646,49 @@ if(window.snake) {
                 const burp = sounds2def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"BURP/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
         
                 // console.log(eat, burp);
+                if(!document.getElementById('poi?')) {
+                  const poibox = document.createElement('input');
+                  poibox.type = 'checkbox';
+                  poibox.id = poibox.name = 'poi?'
+                  poibox.style = 'position:relative;top: -10px;left: 50px;'
+                  const poilabel = document.createElement('label');
+                  poilabel.for = 'poi?';
+                  poilabel.innerText = 'poi sounds';
+                  poilabel.style = 'position:relative;top: -10px;left: 50px;'
+          
+                  document.getElementsByClassName('zFl3vb')[0].appendChild(poibox);
+                  document.getElementsByClassName('zFl3vb')[0].appendChild(poilabel);
+
+                  eval(`
+                    window.__oldeat = window.__oldeat || ${sounds1}.${eat}.play;
+                    window.__oldburp = window.__oldburp || ${sounds2}.${burp}.play;
+                  `);
+
+                  poibox.onchange = function() {
+                    if(!poibox.checked) {
+                      eval(`
+                        ${sounds1}.${eat}.play = window.__oldeat;
+                        ${sounds2}.${burp}.play = window.__oldburp;
+                      `);
+                    } else {
+                      eval(`
+                        ${sounds1}.${eat}.play = function() {
+                          if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
+                          const ___________ = new Audio(window.______poi);
+                          ___________.play();
+                        };
+                        ${sounds2}.${burp}.play = function() {    
+                          if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
+                          const ___________ = new Audio(window.______blech);
+                          ___________.play();
+                        };
+                      `);
+                    }
+                  };
+                }
+                
         
-                const poibox = document.createElement('input');
-                poibox.type = 'checkbox';
-                poibox.id = poibox.name = 'poi?'
-                poibox.style = 'position:relative;top: -10px;left: 50px;'
-                const poilabel = document.createElement('label');
-                poilabel.for = 'poi?';
-                poilabel.innerText = 'poi sounds';
-                poilabel.style = 'position:relative;top: -10px;left: 50px;'
-        
-                document.getElementsByClassName('zFl3vb')[0].appendChild(poibox);
-                document.getElementsByClassName('zFl3vb')[0].appendChild(poilabel);
-        
-                eval(`
-                  window.__oldeat = ${sounds1}.${eat}.play;
-                  window.__oldburp = ${sounds2}.${burp}.play;
-                `);
-        
-                poibox.onchange = function() {
-                  if(!poibox.checked) {
-                    eval(`
-                      ${sounds1}.${eat}.play = window.__oldeat;
-                      ${sounds2}.${burp}.play = window.__oldburp;
-                    `);
-                  } else {
-                    eval(`
-                      ${sounds1}.${eat}.play = function() {
-                        if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
-                        const ___________ = new Audio(window.______poi);
-                        ___________.play();
-                      };
-                      ${sounds2}.${burp}.play = function() {    
-                        if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
-                        const ___________ = new Audio(window.______blech);
-                        ___________.play();
-                      };
-                    `);
-                  }
-                };
+                
               }
 
 
