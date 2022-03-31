@@ -650,11 +650,11 @@ if(window.snake) {
                   const poibox = document.createElement('input');
                   poibox.type = 'checkbox';
                   poibox.id = poibox.name = 'poi?'
-                  poibox.style = 'position:relative;top: -10px;left: 50px;'
+                  poibox.style = 'position: relative;top: -10px;left: 50px;'
                   const poilabel = document.createElement('label');
                   poilabel.for = 'poi?';
                   poilabel.innerText = 'poi sounds';
-                  poilabel.style = 'position:relative;top: -10px;left: 50px;'
+                  poilabel.style = 'position: relative;top: -10px;left: 50px;color: white;'
           
                   document.getElementsByClassName('zFl3vb')[0].appendChild(poibox);
                   document.getElementsByClassName('zFl3vb')[0].appendChild(poilabel);
