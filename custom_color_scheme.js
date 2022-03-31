@@ -637,7 +637,8 @@ if(window.snake) {
                 )[0];
                 const sounds1 = sounds1def.match(/[a-zA-Z0-9_$]{1,8}/)[0];
                 const eat = sounds1def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"EAT"/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
-        
+                const portal = sounds1def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"PORTAL"/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
+                const twin = sounds1def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"REVERSE"/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
         
                 const sounds2def = code.match(
                   /[a-zA-Z0-9_$]{1,8}={[^}]*?"BURP"[^}]*?}/
@@ -646,7 +647,7 @@ if(window.snake) {
                 const burp = sounds2def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"BURP/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
         
                 // console.log(eat, burp);
-                if(!document.getElementById('poi?')) {
+                if(!document.getElementById('poi?')) {  
                   const poibox = document.createElement('input');
                   poibox.type = 'checkbox';
                   poibox.id = poibox.name = 'poi?'
@@ -661,6 +662,8 @@ if(window.snake) {
 
                   eval(`
                     window.__oldeat = window.__oldeat || ${sounds1}.${eat}.play;
+                    window.__oldportal = window.__oldportal || ${sounds1}.${portal}.play;
+                    window.__oldtwin = window.__oldtwin || ${sounds1}.${twin}.play;
                     window.__oldburp = window.__oldburp || ${sounds2}.${burp}.play;
                   `);
 
@@ -668,11 +671,23 @@ if(window.snake) {
                     if(!poibox.checked) {
                       eval(`
                         ${sounds1}.${eat}.play = window.__oldeat;
+                        ${sounds1}.${portal}.play = window.__oldportal;
+                        ${sounds1}.${twin}.play = window.__oldtwin;
                         ${sounds2}.${burp}.play = window.__oldburp;
                       `);
                     } else {
                       eval(`
                         ${sounds1}.${eat}.play = function() {
+                          if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
+                          const ___________ = new Audio(window.______poi);
+                          ___________.play();
+                        };
+                        ${sounds1}.${portal}.play = function() {
+                          if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
+                          const ___________ = new Audio(window.______poi);
+                          ___________.play();
+                        };
+                        ${sounds1}.${twin}.play = function() {
                           if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
                           const ___________ = new Audio(window.______poi);
                           ___________.play();
