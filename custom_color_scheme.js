@@ -21,207 +21,22 @@ if(window.snake) {
       settings.sky = '#4DC1F9';
     if(settings.separators === undefined)
       settings.separators = '#87CEFA';
-    if(settings.buttons === undefined)
-      settings.buttons = '#1155CC';
-    if(settings.light_goal === undefined) {
-      let f = settings.light_squares;
-      f = f.replace('#', '');
-      let { h, s, v, } = rgb_to_hsv({
-        r: parseInt(f.substring(0, 2), 16),
-        g: parseInt(f.substring(2, 4), 16),
-        b: parseInt(f.substring(4, 6), 16),
-      });
-      s += 0.03;
-      v += 0.07;
-      s = s > 1 ? 1 : s;
-      v = v > 1 ? 1 : v;
-
-      let { r, g, b } = hsv_to_rgb({ h: h, s: s, v: v });
-      // settings.light_goal = '#' + (~~r).toString(16) + (~~g).toString(16) + (~~b).toString(16);
-      settings.light_goal = rgb_to_hex({ r: Math.round(r), g: Math.round(g), b: Math.round(b) });
-    }
-    if(settings.dark_goal === undefined) {
-      let f = settings.dark_squares;
-      f = f.replace('#', '');
-      let { h, s, v, } = rgb_to_hsv({
-        r: parseInt(f.substring(0, 2), 16), 
-        g: parseInt(f.substring(2, 4), 16),
-        b: parseInt(f.substring(4, 6), 16),
-      });
-      s += 0.03;
-      v -= 0.08;
-      s = s > 1 ? 1 : s;
-      v = v > 1 ? 1 : v < 0 ? 0 : v;
-
-      let { r, g, b } = hsv_to_rgb({ h: h, s: s, v: v });
-      // settings.dark_goal = '#' + (~~r).toString(16) + (~~g).toString(16) + (~~b).toString(16);
-      settings.dark_goal = rgb_to_hex({ r: Math.round(r), g: Math.round(g), b: Math.round(b) });
-    }
-    let f = settings.dark_goal;
-    f = f.replace('#', '');
-    let { h, s, v, } = rgb_to_hsv({
-      r: parseInt(f.substring(0, 2), 16), 
-      g: parseInt(f.substring(2, 4), 16),
-      b: parseInt(f.substring(4, 6), 16),
-    });
-    v -= .11;
-    v = v < 0 ? 0 : v;
-    let { r, g, b } = hsv_to_rgb({ h: h, s: s, v: v });
-    // settings.darker_goal = '#' + (~~r).toString(16) + (~~g).toString(16) + (~~b).toString(16);
-    settings.darker_goal = rgb_to_hex({ r: Math.round(r), g: Math.round(g), b: Math.round(b) });
-
-    // console.log(settings.dark_goal, settings.light_goal, settings.darker_goal)
-
+    // if(settings.buttons === undefined)
+    //   settings.buttons = '#1155CC';
+    
 
     
-    document.body.bgColor = settings.background || settings.score_bar;
-    document.getElementsByClassName('sEOCsb')[0].style.backgroundColor = settings.score_bar;
-    let bacon = document.getElementsByClassName('T7SB3d');
-    for(let b of bacon)
-      b.style.background = settings.sky;
-    let pork = document.getElementsByClassName('e1XC2b');
-    for(let p of pork)
-      p.style.borderBottomColor = settings.separators;
-    let ham = document.getElementsByClassName('FL0z2d');
-    for(let h of ham)
-      h.style.background = settings.buttons;
 
-
-
-    const standard = document.createElement('canvas');
-    standard.width = 128;
-    standard.height = 128;
-    const mctx = standard.getContext('2d');
-    mctx.fillStyle = settings.borders;
-    roundRect(mctx, 16, 16, 95, 95, 5, true);
-    for(let i = 0; i < 3; i++) {
-      for(let j = 0; j < 3; j++){
-        if(i % 2 == 0 ^ j % 2 == 0)
-          mctx.fillStyle = settings.light_squares;
-        else
-          mctx.fillStyle = settings.dark_squares;
-        mctx.fillRect(20 + i * 29, 20 + j * 29, 29, 29);
-      }
-    }
     
-    
-    const url_m = standard.toDataURL();
-    document.getElementsByClassName('iLZj5e')[4].children[0].src = url_m;
+    // let ham = document.getElementsByClassName('FL0z2d');
+    // for(let h of ham)
+    //   h.style.background = settings.buttons;
 
 
-
-    const small = document.createElement('canvas');
-    small.width = 128;
-    small.height = 128;
-    const sctx = small.getContext('2d');
-    sctx.fillStyle = settings.borders;
-    roundRect(sctx, 26, 26, 75, 75, 5, true);
-
-    for(let i = 0; i < 2; i++) {
-      for(let j = 0; j < 2; j++) {
-        if(i % 2 == 0 ^ j % 2 == 0)
-          sctx.fillStyle = settings.light_squares;
-        else
-          sctx.fillStyle = settings.dark_squares;
-
-        sctx.fillRect(30 + 34 * i, 30 + 34 * j, 34, 34);
-      }
-    }
-
-    const url_s = small.toDataURL();
-    document.getElementsByClassName('iLZj5e')[4].children[1].src = url_s;
-
-
-
-    const large = document.createElement('canvas');
-    large.width = 128;
-    large.height = 128;
-    const lctx = large.getContext('2d');
-    lctx.fillStyle = settings.borders;
-    roundRect(lctx, 6, 6, 115, 115, 5, true);
-
-    for(let i = 0; i < 4; i++) 
-      for(let j = 0; j < 4; j++) {
-        if(i % 2 === 0 ^ j % 2 === 0)
-          lctx.fillStyle = settings.light_squares;
-        else
-          lctx.fillStyle = settings.dark_squares;
-        
-        lctx.fillRect(10 + 27 * i, 10 + 27 * j, 27, 27);
-      }
-    
-    const url_l = large.toDataURL();
-    document.getElementsByClassName('iLZj5e')[4].children[2].src = url_l;
-
-
-    const wall_img = new Image();
-    wall_img.src = 'https://i.postimg.cc/XN8CGSPy/trophy-01.png';
-    wall_img.crossOrigin = 'Anonymous';
     setTimeout(function() {
-      const wall_mode = document.createElement('canvas');
-      wall_mode.width = 128;
-      wall_mode.height = 128;
-      const wctx = wall_mode.getContext('2d');
-      wctx.drawImage(wall_img, 0, 0);
-
-      let wall_data = wctx.getImageData(0, 0, 128, 128);
-      let pix = wall_data.data;
-
-      let w_f = settings.walls;
-      w_f = w_f.replace('#', '');
-      let w_r = parseInt(w_f.substring(0, 2), 16);
-      let w_g = parseInt(w_f.substring(2, 4), 16);
-      let w_b = parseInt(w_f.substring(4, 6), 16);
-
-      let l_f = settings.light_squares;
-      l_f = l_f.replace('#', '');
-      let l_r = parseInt(l_f.substring(0, 2), 16);
-      let l_g = parseInt(l_f.substring(2, 4), 16);
-      let l_b = parseInt(l_f.substring(4, 6), 16);
-
-      for(let y = 0; y < 128; y++)
-        for(let x = 0; x < 128; x++) {
-          let index = 4 * (x + y * 128);
-          let { h, s, v, } = rgb_to_hsv({
-            r: pix[index],
-            g: pix[1 + index],
-            b: pix[2 + index],
-          });
-
-
-          
-
-          if(Math.abs(h - 95) < 2) {
-            pix[index] = w_r;
-            pix[1 + index] = w_g;
-            pix[2 + index] = w_b;
-          } else {
-            pix[index] = l_r;
-            pix[1 + index] = l_g;
-            pix[2 + index] = l_b;
-          }
-
-        }
       
-      wctx.putImageData(wall_data, 0, 0);
-
-      const url_w = wall_mode.toDataURL();
-      document.getElementsByClassName('e1XC2b')[1].children[0].children[1].src = url_w;
-      document.getElementsByClassName('vuOknd')[1].children[0].src = url_w;
-
-
-      let key_img = new Image();
-      key_img.src = 'https://i.postimg.cc/nzkFstB8/key-types-dark.png';
-      key_img.crossOrigin = 'Anonymous';
       setTimeout(_ => {
-        const key_types = document.createElement('canvas');
-        key_types.width = 640;
-        key_types.height = 128;
-        const kctx = key_types.getContext('2d');
-        kctx.drawImage(key_img, 0, 0);
-
-        const kdata = kctx.getImageData(0, 0, 640, 128);
-        pix = kdata.data;
+        
 
         const wrgb = hex_to_rgb(settings.walls);
         const whsv = rgb_to_hsv({ r: wrgb.r, g: wrgb.g, b: wrgb.b, });
@@ -242,26 +57,27 @@ if(window.snake) {
             v: Math.min(whsv.v + .16, 1),
           };
         const new_rgb = hsv_to_rgb({ h: new_hsv.h, s: new_hsv.s, v: new_hsv.v, });
+        settings.keyBlockMarks = settings.keyBlockMarks || rgb_to_hex(new_rgb);
 
-        for(let y = 0; y < key_img.height; y++) {
-          for(let x = 0; x < key_img.width; x++) {
-            let index = 4 * (x + y * key_img.width);
-            let { h, s, v, } = rgb_to_hsv({
-              r: pix[index],
-              g: pix[1 + index],
-              b: pix[2 + index],
-            });
+        // for(let y = 0; y < key_img.height; y++) {
+        //   for(let x = 0; x < key_img.width; x++) {
+        //     let index = 4 * (x + y * key_img.width);
+        //     let { h, s, v, } = rgb_to_hsv({
+        //       r: pix[index],
+        //       g: pix[1 + index],
+        //       b: pix[2 + index],
+        //     });
 
-            if(Math.abs(h - 90) < 2) {
-              pix[index] = new_rgb.r;
-              pix[1 + index] = new_rgb.g;
-              pix[2 + index] = new_rgb.b;
-            }
-          }
-        }
-        kctx.putImageData(kdata, 0, 0);
+        //     if(Math.abs(h - 90) < 2) {
+        //       pix[index] = new_rgb.r;
+        //       pix[1 + index] = new_rgb.g;
+        //       pix[2 + index] = new_rgb.b;
+        //     }
+        //   }
+        // }
+        // kctx.putImageData(kdata, 0, 0);
 
-        const url_k = key_types.toDataURL();
+        // const url_k = key_types.toDataURL();
         
 
 
@@ -446,6 +262,44 @@ if(window.snake) {
                 ']', ', 19, 18]'
               )
             );
+
+
+            if(document.querySelector('#theme').childElementCount > 9)
+              for(let i = document.querySelector('#theme').childElementCount - 1; i >= 10; i--)
+                document.querySelector('#theme').removeChild(document.querySelector('#theme').children[i]);
+
+
+
+            let __cs = i('https://i.postimg.cc/SNyvbTkp/beau.png');
+
+            let _q__ = new Image();
+            _q__.src = 'https://www.google.com/logos/fnbx/snake_arcade/v5/theme_08.png';
+            _q__.width = _q__.height = 47;
+            let _c__ = document.querySelector('#theme').children;
+            document.querySelector('#theme').replaceChild(__cs, _c__[_c__.length - 1]);
+            document.querySelector('#theme').appendChild(_q__);
+
+            const __wq = code.match(
+              /[a-zA-Z0-9_$]{1,8}=\[[^\]]*?32224f"\.split\(" "\)\]/
+            )[0];
+            window._s_aE = __wq.match(/[a-zA-Z0-9_$]{1,8}/)[0];
+
+            eval(
+              __wq.replace(
+                'split(" ")]',
+                `split(" "), [
+                  "${settings.light_squares}",
+                  "${settings.dark_squares}",
+                  "${settings.shadows}",
+                  "${settings.borders}",
+                  "${settings.keyBlockMarks}",
+                  "${settings.score_bar}",
+                  "${settings.sky}",
+                  "${settings.walls}",
+                ]]`
+              )
+            )
+
             
             if(settings.grey_skull || settings.burger || settings.cactus || settings.hotdog || settings.egg || settings.lime || settings.red_pepper || settings.cane || settings.cracker || settings.tree || settings.poi || settings.custom_url) {
               const normal = {
@@ -551,9 +405,9 @@ if(window.snake) {
                 settings.cane       && (window.darks.push(dead.cane),    document.querySelector('#apple').appendChild(normal.cane));
                 settings.cracker    && (window.darks.push(dead.cracker), document.querySelector('#apple').appendChild(normal.cracker));
                 settings.tree       && (window.darks.push(dead.tree),    document.querySelector('#apple').appendChild(normal.tree));
-                settings.custom_url && (window.darks.push(dead.custom),  document.querySelector('#apple').appendChild(normal.custom));
                 settings.grey_skull && (window.darks.push(dead.skull),   document.querySelector('#apple').appendChild(normal.skull));
                 settings.poi        && (window.darks.push(dead.poi),     document.querySelector('#apple').appendChild(normal.poi));
+                settings.custom_url && (window.darks.push(dead.custom),  document.querySelector('#apple').appendChild(normal.custom));
 
                 const HZ = code.match(
                   /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
@@ -567,58 +421,11 @@ if(window.snake) {
                       
                       ${HZ} = [...document.querySelector('#apple').children].map((e, j) => [{ oa: { canvas: e }, ka: { canvas: window.darks[j] } }][0]);
 
-
-                      // if(${HZ}.length >= 22) {
-                      //   for(let j = document.querySelector('#apple').children.length - 1; j >= 22; j++) {
-                      //     ${HZ}.splice(j, 1);
-                      //   }
-                      // }
-                      // if(${HZ}.length < 22) {
-                      //   ${HZ}.push({ wa: { canvas: new Image }, oa: { canvas: new Image } });
-                      //   for(let j = 22; j < document.querySelector('#apple').children.length; j++) {
-                      //     ${HZ}.push({
-                      //       wa: { canvas: document.querySelector('#apple').children[j] },
-                      //       oa: { canvas: window.darks[j] },
-                      //     });
-                      //   }
-                      // }
                       console.log(${HZ})
                     `
                   )
                 );
               }, 250);
-
-
-              // eval(`var bu_ = new Image(); bu_.src = 'https://i.postimg.cc/B6ycxmBb/porga.png';`);
-              // eval(`var ca_ = new Image(); ca_.src = 'https://i.postimg.cc/RCDVL7Bf/index.png';`);
-              // eval(`var do_ = new Image(); do_.src = 'https://i.postimg.cc/rsrbW0x6/dog.png';`);
-              // eval(`var eg_ = new Image(); eg_.src = 'https://i.postimg.cc/501jDL9g/eg.png';`);
-              // eval(`var li_ = new Image(); li_.src = 'https://i.postimg.cc/k5kWcyFB/lime.png';`);
-              // eval(`var pe_ = new Image(); pe_.src = 'https://i.postimg.cc/BQqHMbDc/redpepper.png';`);
-              // eval(
-              //   code.match(
-              //     /[a-zA-Z0-9_$]{1,8}=function\(a\){return a\.[a-zA-Z0-9_$]{1,8}\.canvas}/
-              //   )[0].replace(
-              //     '{',
-              //     `{
-              //       if(a.path && a.path.includes('apple') && [...document.querySelector('#apple').children].indexOf(document.getElementsByClassName('DqMRee tuJOWd')[0]) > 21)
-              //         return document.querySelector('#apple').getElementsByClassName('DqMRee tuJOWd')[0].src.includes('porga') 
-              //           ? bu_ 
-              //         : document.querySelector('#apple').getElementsByClassName('DqMRee tuJOWd')[0].src.includes('index') 
-              //           ? ca_ 
-              //         : document.querySelector('#apple').getElementsByClassName('DqMRee tuJOWd')[0].src.includes('dog')
-              //           ? do_ 
-              //         : document.querySelector('#apple').getElementsByClassName('DqMRee tuJOWd')[0].src.includes('lime')
-              //           ? li_
-              //         : document.querySelector('#apple').getElementsByClassName('DqMRee tuJOWd')[0].src.includes('pepper')
-              //           ? pe_
-              //         : eg_;
-                    
-                    
-              //     `
-              //   )
-              // );
-
 
 
               eval(
@@ -702,6 +509,13 @@ if(window.snake) {
                   };
                 }
                 
+                
+
+                
+                
+                
+
+                
         
                 
               }
@@ -710,186 +524,42 @@ if(window.snake) {
             }
 
 
+            const ______________q = code.match(
+              /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}&&this[^]*?el\(\),a\)}/
+            )[0];
+            const _s_eE = ______________q.match(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=[a-zA-Z0-9_$]{1,8}\(this,this\.[a-zA-Z0-9_$]{1,8},3\)/)[0];
+            eval(
+              ______________q.replaceAll(
+                _s_eE,
+                _s_eE.replace(',3)',`,7) || ${_s_eE.replace(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=/, '')}`)
+              )
+            );
 
-            eval(`var boxImage = new Image; boxImage.src = 'https://i.postimg.cc/C1w3nYcZ/box.png';`);
-            setTimeout(function() {
+            const thing = document.querySelector('#theme').parentNode;
+            thing.onmousemove = thing.onclick = function() {
+              const themeindex = [...document.querySelector('#theme').children].indexOf(document.querySelector('#theme').getElementsByClassName('tuJOWd')[0]);
+              let theme_ = window[window._s_aE][themeindex];
+              // console.log(theme_);
               
+              if(!theme_) {
+                theme_ = window[window._s_aE][0];
+              }
 
-              const box = code.match(
-                /this\.[a-zA-Z0-9_$]{1,8}=new [a-zA-Z0-9_$]{1,8}\([^)}]*?box\.png[^})]*?\);/
-              )[0].replace('this.', '').replace(/=new[^]*/g, '');
+              // document.body.bgColor = theme_ 
+              // document.getElementsByClassName('sEOCsb')[0].style.backgroundColor = settings.score_bar;
+              let bacon = document.getElementsByClassName('T7SB3d');
+              for(let b of bacon)
+                b.style.background = theme_[6];
+              let pork = document.getElementsByClassName('e1XC2b');
+              for(let p of pork) {
+                let separators = theme_[6];
+                separators = rgb_to_hsv(hex_to_rgb(separators));
+                separators.s = Math.max(separators.s - .23, 0);
+                separators = rgb_to_hex(hsv_to_rgb(separators));
+                p.style.borderBottomColor = separators;
+              }
+            };
 
-              
-              eval(
-                `
-                var boxCanvas = document.createElement('canvas');
-                boxCanvas.width = 1024;boxCanvas.height = 128;
-                var bctx = boxCanvas.getContext('2d');
-
-                bctx.drawImage(boxImage, 0, 0);
-          
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(256, 0, 128, 128);
-
-                bctx.fillStyle = '${settings.dark_goal}';
-                bctx.fillRect(277, 21, 85, 85);
-
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(298, 42, 42, 42);
-
-                bctx.fillStyle = '${settings.dark_goal}';
-                bctx.fillRect(384, 0, 128, 128);
-
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(405, 21, 85, 85);
-
-                bctx.fillStyle = '${settings.dark_goal}';
-                bctx.fillRect(426, 42, 42, 42);
-
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(512, 0, 128, 128);
-
-                bctx.fillStyle = '${settings.darker_goal}';
-                bctx.fillRect(533, 21, 85, 85);
-
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(554, 42, 42, 42);
-
-                bctx.fillStyle = '${settings.darker_goal}';
-                bctx.fillRect(640, 0, 128, 128);
-
-                bctx.fillStyle = '${settings.light_goal}';
-                bctx.fillRect(661, 21, 85, 85);
-
-                bctx.fillStyle = '${settings.darker_goal}';
-                bctx.fillRect(682, 42, 42, 42);
-
-
-                `
-              );
-
-              eval(
-                code.match(
-                  /[a-zA-Z0-9_$]{1,8}=function\(a\){a\.[a-zA-Z0-9_$]{1,8}\.globalCompositeOperation[^}]*"source-over"}/
-                )[0].replace(
-                  /#94BD46/g,
-                  settings.shadows
-                )
-              );
-
-              const tkb = code.match(
-                /this\.[a-zA-Z0-9_$]{1,8}=new [a-zA-Z0-9_$]{1,8}\("snake_arcade\/key_types_dark\.png",[^)]*?\)/
-              )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
-
-              const oa = code.match(
-                /[a-zA-Z0-9_$]{1,8}=function\(a\){return a\.[a-zA-Z0-9_$]{1,8}\.canvas}/
-              )[0].match(/a\.[a-zA-Z0-9_$]{1,8}\.canvas/)[0].replace('a.', '').replace('.canvas', '');
-
-
-              eval(
-                `_boorg = new Image;_boorg.src='${url_k}';_boorg.crossOrigin='Anonymous';
-                boorg = { wa: { canvas: _boorg, }, oa: { canvas: _boorg, }, };`
-              );
-              eval(
-                code.match(
-                  /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}&&this[^]*?el\(\),a\)}/
-                )[0].replace(
-                  '{',
-                  `{
-                    this\.${box}\.wa = this.${box}.oa = { canvas: boxCanvas, };
-                  `
-                ).replace(
-                  '#578A34',
-                  settings.borders
-                ).replaceAll(
-                  '#578A34',
-                  settings.walls
-                ).replaceAll(
-                  '#a2d149',
-                  settings.dark_squares
-                ).replaceAll(
-                  '#AAD751',
-                  settings.light_squares
-                ).replaceAll(
-                  tkb, 
-                  'boorg'
-                )
-              );
-              eval(
-                code.match(
-                  /[a-zA-Z0-9_$]{1,8}=function\(a,b,c,d\){a\.context\.fillStyle[^}]*?}}/
-                )[0].replaceAll(
-                  '#a2d149',
-                  settings.dark_squares
-                ).replaceAll(
-                  '#AAD751',
-                  settings.light_squares
-                )
-              );
-              eval(
-                code.match(
-                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(\){var a=this,b=[^]*?return b\.promise}/
-                )[0].replaceAll(
-                  '#a2d149',
-                  settings.dark_squares
-                ).replaceAll(
-                  '#AAD751',
-                  settings.light_squares
-                )
-              );
-
-          
-              
-          
-              eval(
-                code.match(
-                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(a,b,c,d,e\){this\.[a-zA-Z0-9_$]{1,8}&&\(this\.[a-zA-Z0-9_$]{1,8}\.translate[^}]*?y\)\)}/
-                )[0].replace(
-                  '{',
-                  `{
-                    let canv = document.createElement('canvas');
-                    canv.width = 403;canv.height = 110;
-          
-                    let ctx = canv.getContext('2d');
-          
-                    for(let i = 0; i < 12; i++) {
-                      if(i % 2 === 0)
-                        ctx.fillStyle = '${settings.dark_ee || settings.dark_squares}';
-                      else
-                        ctx.fillStyle = '${settings.light_ee || settings.light_squares}';
-                      
-                      ctx.fillRect(i * 34, 0, (i + 1) * 34, 34);
-                    }
-          
-                    for(let i = 0; i < 12; i++) {
-                      if(i % 2 === 0)
-                        ctx.fillStyle = '${settings.light_ee || settings.light_squares}';
-                      else
-                        ctx.fillStyle = '${settings.dark_ee || settings.dark_squares}';
-                      
-                      ctx.fillRect(i * 34, 34, (i + 1) * 34, 69);
-                    }
-          
-                    for(let i = 0; i < 12; i++) {
-                      if(i % 2 === 0)
-                        ctx.fillStyle = '${settings.dark_ee || settings.dark_squares}';
-                      else
-                        ctx.fillStyle = '${settings.light_ee || settings.light_squares}';
-                      
-                      ctx.fillRect(i * 34, 70, (i + 1) * 34, canv.height);
-                    }
-                    
-                  `
-                ).replace(
-                  'drawImage(',
-                  `
-                  drawImage(Object.values(this).reduce(
-                    (s, el) => s || (typeof el === 'string' ? el.includes('end_empty') : false), false
-                  ) ? canv : 
-                  `
-                )
-              );
-            }, 250);
           }, 250);
         }
       }, 250);
@@ -1092,7 +762,7 @@ if(window.snake) {
   }
 
   function rgb_to_hex(col) {
-    return `#${col.r.toString(16).padStart(2, '0')}${col.g.toString(16).padStart(2, '0')}${col.b.toString(16).padStart(2, '0')}`
+    return `#${(~~col.r).toString(16).padStart(2, '0')}${(~~col.g).toString(16).padStart(2, '0')}${(~~col.b).toString(16).padStart(2, '0')}`
   }
 
   function close(c0, c1, rr = 1, rg = rr, rb = rr) {
