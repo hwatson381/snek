@@ -270,7 +270,7 @@ if(window.snake) {
 
 
 
-            let __cs = i('https://i.postimg.cc/SNyvbTkp/beau.png');
+            let __cs = i('https://i.postimg.cc/vmMmqv9W/902293376681017415.png');
 
             let _q__ = new Image();
             _q__.src = 'https://www.google.com/logos/fnbx/snake_arcade/v5/theme_08.png';
