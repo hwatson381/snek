@@ -98,22 +98,22 @@ if(window.snake) {
         function processCode(code) {
 
           const poisonsnake = code.match(
-            /([a-zA-Z0-9_$]{1,8}\(this\.[a-zA-Z0-9_$]{1,8},"#5282F2","#909090"\);){3}/
+            /([a-zA-Z0-9_$]{1,8}\(this\.[a-zA-Z0-9_$]{1,8},"#5282F2","#909090"\);?){3}/
           )[0];
           console.log(poisonsnake);
 
           settings.custom_poison = settings.custom_poison || '#909090';
 
-          eval(
-            code.match(
-              /[a-zA-Z0-9_$]{1,8}\.prototype\.resetState=function\(a\){[^]*?this,\!1\)}/
-            )[0].replace(
-              '{',
-              `{
-                ${poisonsnake.replace(/#909090/g, settings.custom_poison)}
-              `
-            )
-          );
+          // eval(
+          //   code.match(
+          //     /[a-zA-Z0-9_$]{1,8}\.prototype\.resetState=function\(a\){[^]*?this\.menu,\!1,this\.[a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8}\)}/
+          //   )[0].replace(
+          //     '{',
+          //     `{
+          //       ${poisonsnake.replace(/#909090/g, settings.custom_poison)}
+          //     `
+          //   )
+          // );
 
           const psrgb = hex_to_rgb(settings.custom_poison);
           eval(
@@ -409,28 +409,32 @@ if(window.snake) {
                 settings.poi        && (window.darks.push(dead.poi),     document.querySelector('#apple').appendChild(normal.poi));
                 settings.custom_url && (window.darks.push(dead.custom),  document.querySelector('#apple').appendChild(normal.custom));
 
-                const HZ = code.match(
-                  /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
-                )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
-                eval(
-                  code.match(
-                    /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(\){if\(!this\.[a-zA-Z0-9_$]{1,8}&&[^]*?return this\.reset\(\)}/
-                  )[0].replace(
-                    '{',
-                    `{
+                // const HZ = code.match(
+                //   /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
+                // )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
+                
+                // eval(
+                //   code.match(
+                //     /[a-zA-Z0-9_$]{1,8}\.prototype\.resetState=function\(a\){[^]*?this\.menu,\!1,this\.[a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8}\)}/
+                //   )[0].replace(
+                //     '{',
+                //     `{
                       
-                      ${HZ} = [...document.querySelector('#apple').children].map((e, j) => [{ oa: { canvas: e }, ka: { canvas: window.darks[j] } }][0]);
+                //       // ${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0]);
+                //       ${HZ}.oa
 
-                      console.log(${HZ})
-                    `
-                  )
-                );
+                //       console.log(${HZ})
+                //       console.log(this);
+                //     `
+                //   )
+                // );
+                
               }, 250);
 
 
               eval(
                 code.match(
-                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(\){[^}]*?apple[^]*?el\(\)\)}}/
+                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(\){[^}]*?apple[^]*?this\.[a-zA-Z0-9_$]{1,8}\)}}/
                 )[0].replace(
                   'Math.floor(21*Math.random());',
                   `Math.floor((21 + ~~${settings.burger} + ~~${settings.cactus} + ~~${settings.hotdog} + ~~${settings.egg} + ~~${settings.lime} + ~~${settings.red_pepper} + ~~${settings.cane} + ~~${!!settings.custom_url} + ~~${settings.grey_skull} + ~~${settings.poi}) * Math.random());`
@@ -525,13 +529,19 @@ if(window.snake) {
 
 
             const ______________q = code.match(
-              /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}&&this[^]*?el\(\),a\)}/
+              /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8}&&this[^]*?canvas,b,d\)}}/
             )[0];
-            const _s_eE = ______________q.match(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=[a-zA-Z0-9_$]{1,8}\(this,this\.[a-zA-Z0-9_$]{1,8},3\)/)[0];
+            const _s_eE = ______________q.match(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=[a-zA-Z0-9_$]{1,8}\(this\.settings,this\.settings\.[a-zA-Z0-9_$]{1,8},3\)/)[0];
+            const HZ = code.match(
+              /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
+            )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
             eval(
               ______________q.replaceAll(
                 _s_eE,
                 _s_eE.replace(',3)',`,7) || ${_s_eE.replace(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=/, '')}`)
+              ).replace(
+                /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/,
+                `f.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? f.type : 0`
               )
             );
 
