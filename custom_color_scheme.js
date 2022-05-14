@@ -114,6 +114,7 @@ if(window.snake) {
           //     `
           //   )
           // );
+          
 
           const psrgb = hex_to_rgb(settings.custom_poison);
           eval(
@@ -122,6 +123,24 @@ if(window.snake) {
             )[0].replace(
               '145,145,145',
               `${psrgb.r},${psrgb.g},${psrgb.b}`
+            )
+          );
+
+          eval(
+            code.match(/[a-zA-Z0-9_$]{1,8}=\[{base:"#e7471d"[^]*?10}]/)[0].replace(
+              /#909090/g, settings.custom_poison
+            ).replace(
+              /#808080/g, rgb_to_hex(
+                Math.max(psrgb.r - 16, 0),
+                Math.max(psrgb.g - 16, 0),
+                Math.max(psrgb.b - 16, 0)
+              )
+            ).replace(
+              /#858585/g, rgb_to_hex(
+                Math.max(psrgb.r - 11, 0),
+                Math.max(psrgb.g - 11, 0),
+                Math.max(psrgb.b - 11, 0)
+              )
             )
           );
 
@@ -248,7 +267,7 @@ if(window.snake) {
 
             eval(
               code.match(
-                /[a-zA-Z0-9_$]{1,8}=\[\["#4E7CF6","#17439F"\],[^]*?"#6B6B6B"\]\]/
+                /[a-zA-Z0-9_$]{1,8}=\n?\[\["#4E7CF6","#17439F"\],[^]*?"#6B6B6B"\]\]/
               )[0].replace(
                 '"#6B6B6B"]]',
                 `"#6B6B6B"], ["${settings.custom_gradient[0]}", "${settings.custom_gradient[1]}"], ["${settings.custom_yinyang[0]}", "${settings.custom_yinyang[1]}"]]`
@@ -535,6 +554,7 @@ if(window.snake) {
             const HZ = code.match(
               /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
             )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
+            window._______________________________poisonset = false;
             eval(
               ______________q.replaceAll(
                 _s_eE,
@@ -542,6 +562,11 @@ if(window.snake) {
               ).replace(
                 /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/,
                 `f.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? f.type : 0`
+              ).replace(
+                '{',
+                `{
+                  if(!window._______________________________poisonset) { ${poisonsnake.replace(/#909090/g, settings.custom_poison)}; window._______________________________poisonset = true; }
+                `
               )
             );
 
@@ -593,6 +618,7 @@ if(window.snake) {
       red_pepper:    true,
       grey_skull:    true,
       poi:           true,
+      custom_poison: '#ef4d00',
     });
   };
   window.snake.desert = function() {
@@ -789,3 +815,5 @@ if(window.snake) {
     return img;
   }
 }
+
+
