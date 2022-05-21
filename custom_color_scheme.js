@@ -475,6 +475,8 @@ if(window.snake) {
                 )[0];
                 const sounds2 = sounds2def.match(/[a-zA-Z0-9_$]{1,8}/)[0];
                 const burp = sounds2def.match(/[a-zA-Z0-9_$]{1,8}:new [a-zA-Z0-9_$]{1,8}\([a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8},"BURP/)[0].match(/[a-zA-Z0-9_$]{1,8}/)[0];
+                console.log(sounds2, burp);
+                console.log(sounds1, eat);
         
                 // console.log(eat, burp);
                 if(!document.getElementById('poi?')) {  
@@ -503,9 +505,14 @@ if(window.snake) {
                         ${sounds1}.${eat}.play = window.__oldeat;
                         ${sounds1}.${portal}.play = window.__oldportal;
                         ${sounds1}.${twin}.play = window.__oldtwin;
-                        ${sounds2}.${burp}.play = window.__oldburp;
                       `);
+                      window[sounds2][burp].play = window.__oldburp;
                     } else {
+                      window[sounds2][burp].play = function() {
+                        if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
+                        const ___________ = new Audio(window.______blech);
+                        ___________.play();
+                      };
                       eval(`
                         ${sounds1}.${eat}.play = function() {
                           if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
@@ -522,11 +529,7 @@ if(window.snake) {
                           const ___________ = new Audio(window.______poi);
                           ___________.play();
                         };
-                        ${sounds2}.${burp}.play = function() {    
-                          if(document.getElementsByClassName('oGdex JWsmhb')[0].src.includes('off'))return;    
-                          const ___________ = new Audio(window.______blech);
-                          ___________.play();
-                        };
+                        
                       `);
                     }
                   };
@@ -815,5 +818,3 @@ if(window.snake) {
     return img;
   }
 }
-
-
