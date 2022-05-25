@@ -551,11 +551,11 @@ if(window.snake) {
 
 
             const ______________q = code.match(
-              /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8}&&this[^]*?canvas,b,d\)}}/
+              /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){this\.[a-zA-Z0-9_$]{1,8}\.[a-zA-Z0-9_$]{1,8}&&this[^]*?canvas,[a-zA-Z0-9_$]{1,8},[a-zA-Z0-9_$]{1,8}\)}}/
             )[0];
             const _s_eE = ______________q.match(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=[a-zA-Z0-9_$]{1,8}\(this\.settings,this\.settings\.[a-zA-Z0-9_$]{1,8},3\)/)[0];
             const HZ = code.match(
-              /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/
+              /l\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?l\.type:0/
             )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
             window._______________________________poisonset = false;
             eval(
@@ -563,8 +563,8 @@ if(window.snake) {
                 _s_eE,
                 _s_eE.replace(',3)',`,7) || ${_s_eE.replace(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=/, '')}`)
               ).replace(
-                /f\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?f\.type:0/,
-                `f.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? f.type : 0`
+                /l\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?l\.type:0/,
+                `l.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? l.type : 0`
               ).replace(
                 '{',
                 `{
