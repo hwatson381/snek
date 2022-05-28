@@ -453,7 +453,7 @@ if(window.snake) {
 
               eval(
                 code.match(
-                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,8}=function\(\){[^}]*?apple[^]*?this\.[a-zA-Z0-9_$]{1,8}\)}}/
+                  /[a-zA-Z0-9_$]{1,8}\.prototype\.[a-zA-Z0-9_$]{1,7}=function\(\){[^}]*?apple[^]*?this\.[a-zA-Z0-9_$]{1,8}\)}}/
                 )[0].replace(
                   'Math.floor(21*Math.random());',
                   `Math.floor((21 + ~~${settings.burger} + ~~${settings.cactus} + ~~${settings.hotdog} + ~~${settings.egg} + ~~${settings.lime} + ~~${settings.red_pepper} + ~~${settings.cane} + ~~${!!settings.custom_url} + ~~${settings.grey_skull} + ~~${settings.poi}) * Math.random());`
@@ -555,21 +555,29 @@ if(window.snake) {
             )[0];
             const _s_eE = ______________q.match(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=[a-zA-Z0-9_$]{1,8}\(this\.settings,this\.settings\.[a-zA-Z0-9_$]{1,8},3\)/)[0];
             const HZ = code.match(
-              /l\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?l\.type:0/
+              /b\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?b\.type:0/
             )[0].match(/this\.[a-zA-Z0-9_$]{1,8}/)[0];
-            window._______________________________poisonset = false;
             eval(
               ______________q.replaceAll(
                 _s_eE,
                 _s_eE.replace(',3)',`,7) || ${_s_eE.replace(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=/, '')}`)
-              ).replace(
-                /l\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?l\.type:0/,
-                `l.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? l.type : 0`
-              ).replace(
-                '{',
-                `{
-                  if(!window._______________________________poisonset) { ${poisonsnake.replace(/#909090/g, settings.custom_poison)}; window._______________________________poisonset = true; }
-                `
+              )
+            );
+            eval(
+              code.match(
+                /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a\){for\(var b=[^]*?=1}}}/
+              )[0].replace(
+                _s_eE,
+                _s_eE.replace(',3)',`,7) || ${_s_eE.replace(/this\.[a-zA-Z0-9_$]{1,6}\.fillStyle=/, '')}`)
+              )
+            );
+
+            eval(
+              code.match(
+                /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){var c=[^]*?=1}/
+              )[0].replace(
+                /b\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?b\.type:0/,
+                `b.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? b.type : 0`
               )
             );
 
