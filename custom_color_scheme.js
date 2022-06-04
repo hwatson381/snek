@@ -447,6 +447,16 @@ if(window.snake) {
                 //     `
                 //   )
                 // );
+
+                    
+                eval(
+                  code.match(
+                    /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){var c=[^]*?=1}/
+                  )[0].replace(
+                    /b\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?b\.type:0/,
+                    `b.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? b.type : 0`
+                  )
+                );
                 
               }, 250);
 
@@ -572,14 +582,7 @@ if(window.snake) {
               )
             );
 
-            eval(
-              code.match(
-                /[a-zA-Z0-9_$]{1,8}\.prototype\.render=function\(a,b\){var c=[^]*?=1}/
-              )[0].replace(
-                /b\.type<this\.[a-zA-Z0-9_$]{1,8}\.length\?b\.type:0/,
-                `b.type < (${HZ} = [...document.querySelector('#apple').children].map((e, j) => [ { oa: { canvas: e }, ka: { canvas: window.darks[j] } } ][0])).length ? b.type : 0`
-              )
-            );
+            
 
             const thing = document.querySelector('#theme').parentNode;
             thing.onmousemove = thing.onclick = function() {
